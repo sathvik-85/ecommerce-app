@@ -1,0 +1,29 @@
+.a {
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  margin-right: 20px;
+}
+
+.a:hover {
+  color: rgb(180, 93, 247);
+}
+
+.flexy {
+  display: flex;
+  flex-direction: row;
+}
+
+.nav-bar {
+  background-color: rgb(118, 113, 113);
+  padding: 1em;
+}
+
+.cart-counter{
+
+  border: 2px solid white;
+  padding:10px;
+  border-radius: 5px;
+  
+}
+
