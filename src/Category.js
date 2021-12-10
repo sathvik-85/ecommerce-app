@@ -61,7 +61,7 @@ const Category = (props) => {
           </Card>
         ))}
 
-      {clicked && <Navigate replace to="/categories/category" />}
+      {clicked && <Navigate replace to="/detail" />}
     </div>
   );
 };

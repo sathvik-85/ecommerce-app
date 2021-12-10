@@ -2,11 +2,12 @@ import React from "react";
 import ReactDom from "react-dom";
 import "./App.css";
 import Button from "@mui/material/Button";
-import {useState,useEffect} from 'react';
+import { useState, useEffect } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SubModal from "./SubModal";
 
+let sum = 0;
 
-
-let sum =0;
 const MODAL_STYLES = {
   position: "fixed",
   top: "50%",
@@ -27,22 +28,37 @@ const OVERLAY_STYLES = {
   zIndex: 1000,
 };
 
-export default function Modal({ open, onClose, cartItems}) {
-  
+export default function Modal({ open, onClose, cartItems, setCartItems }) {
   const [count, setCount] = useState(0);
-
+  const [counters, setCounters] = useState(0);
   
-  
 
-useEffect(() =>{for(var i=count; i<cartItems.length; i++) {
+  const clickedr = (id) => {
+    setCartItems(cartItems.filter((arr) => arr.id !== id));
+  };
 
-  setCount(() => cartItems.length) 
-  console.log(count)
-   sum  = cartItems[i].price + sum;
-   sum = Math.round(sum * 100) / 100
-   console.log(sum);
-}},[cartItems])
-  
+
+
+  useEffect(() => {
+
+    // for (var i = count; i < cartItems.length; i++) {
+    //   setCount(() => cartItems.length);
+
+    //   sum = parseFloat(cartItems[i].price * cartItems[0].quantity) + sum;
+    //   sum = Math.round(sum * 100) / 100;
+     
+    // }
+
+    cartItems.map((cartItem) =>{
+      setCount(parseFloat(cartItem.price * counters) + count);
+    })
+    console.log(count)
+  }, [cartItems]);
+
+
+
+ 
+
   if (!open) return null;
 
   return ReactDom.createPortal(
@@ -52,20 +68,17 @@ useEffect(() =>{for(var i=count; i<cartItems.length; i++) {
         <Button onClick={onClose} variant="contained">
           Close
         </Button>
-        
-        {cartItems.map((cartItem)=>(  <> <div className='popup'>
-          <img src ={cartItem.image} width='50px' height='50px'/> 
-          <p>{cartItem.title}</p>
-          <h6>{cartItem.price+'$'}</h6>
-            
+
+        {cartItems.map((cartItem) => (
+          <>
+          
+            <SubModal cartItem={cartItem} cartItems={cartItems} setCartItems={setCartItems} setCounters={setCounters}/>
+          </>
+        ))}
+
+        <div className="total">
+          <h3>Total:</h3> <h1 className="total"> {count + "$"}</h1>
         </div>
-        
-        <hr />
-    
-       
-        </>))}
-        <div className="total"><h3>Total:</h3> <h1 className="total"> {sum}</h1></div>
- 
       </div>
     </>,
     document.getElementById("portal")

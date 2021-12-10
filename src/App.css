@@ -41,14 +41,54 @@
   justify-content: flex-end;
 }
 
-.popup{
-  display:flex;
-  flex-direction:row;
-  margin-top:20px;
-  justify-content:space-between;
+.popup {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  justify-content: space-between;
 }
 
-.total{
-  display:flex;
-  justify-content:space-between;
+.total {
+  display: flex;
+  justify-content: space-between;
+}
+
+svg:hover {
+  fill: rgb(214, 176, 4);
+}
+
+.card {
+  margin-bottom: 50px;
+}
+
+#minus {
+  background-color:red;
+  color: white;
+  border-radius:100px;  
+  height: 27px;
+  width:30px;
+}
+
+#minus:hover {
+  background-color:white;
+  color: red;
+  border-radius:100px;  
+  height: 30px;
+  width:30px;
+}
+
+#plus{
+  background-color:green;
+  color: white;
+  border-radius:100px;  
+  width:30px;
+  height: 27px;
+}
+
+#plus:hover{
+  background-color:white;
+  color: green;
+  border-radius:100px;  
+  width:30px;
+  height: 30px;
 }

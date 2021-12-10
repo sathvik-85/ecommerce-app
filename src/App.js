@@ -1,7 +1,7 @@
 import API from "./API";
 import Category from "./Category";
 import Subcategory from "./Subcategory";
-import Navigation from "./Navigation";
+
 import "./App.css";
 import { BrowserRouter as Router, Route, Link, Routes } from "react-router-dom";
 import { useState,useEffect } from "react";
@@ -28,6 +28,7 @@ function App() {
   const [data, setData] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems,setCartItems] = useState([]);
+  const [clicked, setClicked] = useState();
 
   
 
@@ -78,7 +79,7 @@ function App() {
               <div style={BUTTON_WRAPPER_STYLES}>
                
 
-                <Modal open={isOpen} onClose={() => setIsOpen(false)} cartItems={cartItems}/>
+                <Modal open={isOpen} clicked={clicked} onClose={() => setIsOpen(false)} onclick={() => setClicked(true)} setCartItems={setCartItems} cartItems={cartItems}/>
 
               </div>
             </div>
@@ -95,7 +96,7 @@ function App() {
       <Routes>
         <Route
           exact
-          path="/categories/category"
+          path="/detail"
           element={<Subcategory data={data} />}
         ></Route>
       </Routes>
