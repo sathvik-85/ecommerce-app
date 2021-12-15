@@ -2,15 +2,14 @@ import "./addproduct.css";
 import "./App.css";
 import React from "react";
 import Button from "@material-ui/core/Button";
-import swal from 'sweetalert';
-
-
+import swal from "sweetalert";
+import {Navigate} from "react-router-dom";
 
 export default function AddProduct(props) {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     const id = e.target[0].value;
-    const title = e.target[1].value;
+    const title = e.target[1].value; 
     const price = e.target[2].value;
     const category = e.target[3].value;
     const description = e.target[4].value;
@@ -37,9 +36,12 @@ export default function AddProduct(props) {
       }
     );
 
-    swal("Good job!", "You added a product", "success");
+    swal("Good job!", "You added a product", "success").then(function() {
+      window.location = "/products";
+  });
+    
+    
   };
-
 
   return (
     <>
@@ -48,39 +50,39 @@ export default function AddProduct(props) {
           <label for="id">
             <strong>Id</strong>
           </label>
-          <input type="number" name="id" />
+          <input type="number" name="id" required />
 
           <label for="title">
             <strong>Title</strong>
           </label>
-          <input type="text" name="title" />
+          <input type="text" name="title" required />
 
           <label for="price">
             <strong>Price</strong>
           </label>
-          <input type="number" name="price" />
+          <input type="number" name="price" required />
 
           <label for="category">
             <strong>Category</strong>
           </label>
-          <input type="text" name="category" />
+          <input type="text" name="category" required />
 
           <label for="description">
             <strong>Description</strong>
           </label>
-          <textarea name="description" cols="50" rows="10"></textarea>
+          <textarea name="description" cols="50" rows="10" required></textarea>
 
           <label for="image">
             <strong>Image Url</strong>
           </label>
-          <input type="url" name="image" />
+          <input type="url" name="image" required />
 
           <Button
             className="button"
             type="submit"
             variant="contained"
             color="primary"
-         
+            
           >
             Submit
           </Button>

@@ -1,45 +1,57 @@
 import React from "react";
-import {useState} from "react";
+import { useState } from "react";
 import "./App.css";
 
-export default function SubModal({cartItem,setCounters,cartItems,setCartItems}) {
+export default function SubModal({
+  cartItem,
+ 
+  setCartItems,
+  handleAddToCart,
+}) {
   const [counter, setCounter] = useState(1);
-  const incrementHandler = () => {
-    setCounter((counter) =>cartItem.quantity =counter + 1);
-    setCounters(counter);
-    // console.log(cartItem)
+
+  const handleRemoveFromCart = (id) => {
+    setCartItems((prev) =>
+      prev.reduce((ack, item) => {
+        if (item.id === id) {
+          if (item.quantity === 1) return ack;
+          return [...ack, { ...item, quantity: item.quantity - 1 }];
+        } else {
+          return [...ack, item];
+        }
+      }, [])
+    );
   };
 
-  const decrementHandler = () => {
-    setCounter((counter) => cartItem.quantity = counter - 1);
-    
-   
-  };
+  // const decrementHandler = () => {
+  //   setCounter(cartItem.quantity = cartItem.quantity - 1);
+
+  // };
   return (
     <>
       <>
-      
         <div
           key={cartItem.id}
           className="popup"
-        //   onClick={() => clickedr(cartItem.id)}
+          //   onClick={() => clickedr(cartItem.id)}
         >
           <img src={cartItem.image} width="50px" height="50px" />
           <p>{cartItem.title}</p>
-          <h6>{cartItem.price * counter + "$"}</h6>
+          <h6>{(cartItem.price * cartItem.quantity).toFixed(2) + "$"}</h6>
         </div>
 
-        <div key={cartItem.id}>
-          <button id="minus" onClick={decrementHandler}>
+        <div>
+          <button id="minus" onClick={() => handleRemoveFromCart(cartItem.id)}>
             <strong>-</strong>
           </button>
           <input
-            type="text"
-            value={counter}
+            type="number"
+            min="0"
+            value={cartItem.quantity}
             style={{ width: "40px", height: "30px" }}
             readonly="readonly"
           />
-          <button id="plus" onClick={incrementHandler}>
+          <button id="plus" onClick={() => handleAddToCart(cartItem)}>
             <strong>+</strong>
           </button>
         </div>

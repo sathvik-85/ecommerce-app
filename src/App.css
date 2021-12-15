@@ -1,7 +1,7 @@
 .image {
   display: flex;
   flex-direction: row;
-  list-style-type: none;
+  list-style-type: none; 
   flex-wrap: wrap;
   justify-content: space-around;
   margin: 10px;
@@ -51,6 +51,7 @@
 .total {
   display: flex;
   justify-content: space-between;
+  align-self: flex-end;
 }
 
 svg:hover {
@@ -59,12 +60,13 @@ svg:hover {
 
 .card {
   margin-bottom: 50px;
+  width:500px;
 }
 
 #minus {
   background-color:red;
   color: white;
-  border-radius:100px;  
+  border-radius:100px;   
   height: 27px;
   width:30px;
 }
@@ -92,3 +94,4 @@ svg:hover {
   width:30px;
   height: 30px;
 }
+

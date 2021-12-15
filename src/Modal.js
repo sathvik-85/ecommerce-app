@@ -28,36 +28,23 @@ const OVERLAY_STYLES = {
   zIndex: 1000,
 };
 
-export default function Modal({ open, onClose, cartItems, setCartItems }) {
+export default function Modal({
+  open,
+  onClose,
+  cartItems,
+  setCartItems,
+  handleAddToCart,
+}) {
   const [count, setCount] = useState(0);
   const [counters, setCounters] = useState(0);
-  
 
-  const clickedr = (id) => {
-    setCartItems(cartItems.filter((arr) => arr.id !== id));
-  };
+  const calculateTotal = (cartItems) =>
+    cartItems.reduce(
+      (ack, cartItem) => ack + cartItem.quantity * cartItem.price,
+      0
+    );
 
-
-
-  useEffect(() => {
-
-    // for (var i = count; i < cartItems.length; i++) {
-    //   setCount(() => cartItems.length);
-
-    //   sum = parseFloat(cartItems[i].price * cartItems[0].quantity) + sum;
-    //   sum = Math.round(sum * 100) / 100;
-     
-    // }
-
-    cartItems.map((cartItem) =>{
-      setCount(parseFloat(cartItem.price * counters) + count);
-    })
-    console.log(count)
-  }, [cartItems]);
-
-
-
- 
+  console.log(cartItems);
 
   if (!open) return null;
 
@@ -71,13 +58,22 @@ export default function Modal({ open, onClose, cartItems, setCartItems }) {
 
         {cartItems.map((cartItem) => (
           <>
-          
-            <SubModal cartItem={cartItem} cartItems={cartItems} setCartItems={setCartItems} setCounters={setCounters}/>
+            <SubModal
+              cartItem={cartItem}
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              setCounters={setCounters}
+              handleAddToCart={handleAddToCart}
+            />
           </>
         ))}
 
         <div className="total">
-          <h3>Total:</h3> <h1 className="total"> {count + "$"}</h1>
+          <h3>Total:</h3>{" "}
+          <h1 className="total">
+            {" "}
+            {calculateTotal(cartItems).toFixed(2) + "$"}
+          </h1>
         </div>
       </div>
     </>,
